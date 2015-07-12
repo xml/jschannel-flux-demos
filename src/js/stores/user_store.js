@@ -1,17 +1,25 @@
-// from React
-var assign = require('react/lib/Object.assign');
-// from Node
+var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
-// our own creations
-var Dispatcher = require('../dispatchers/dispatcher');
-var Constants = require('../constants/action-constants');
 
-// an event-constant, like our action-constants:
+var Dispatcher = require('../dispatcher/dispatcher');
+var ActionConstants = require('../constants/action-constants');
+
+
+// an event-constant, like our action-constants, but only used here:
 var CHANGE_EVENT = 'change';
-
+// our actual data: simple objects
+var _currentUser;
 
 // Create the Public Store Object with Node's EventEmitter:
-var Store = assign(EventEmitter.prototype, {
+var UserStore = assign(EventEmitter.prototype, {
+  getCurrentUser: function() {
+    return _currentUser;
+  },
+  setCurrentUser: function(validatedCredentials) {
+    _currentUser = validatedCredentials;
+  },
+
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -26,10 +34,16 @@ var Store = assign(EventEmitter.prototype, {
   dispatcherIndex: Dispatcher.register(function(payload) {
     // the payloads that arrive from the Dispatcher include two properties:
     // an event-type, plus the `action` object. 
-    var action = payload.action;
+    var type = payload.type;
     // decide what to do, depending on the action's type:
-    switch(action.actionType) {
-      
+    switch(type) {
+      case ActionConstants.NEW_USER_REGISTERED: 
+        console.log("credentials received at Store: ", payload.credentials);
+        setCurrentUser(payload.credentials);
+        break;
+
+      default:
+      // do nothing
     }
     // after performing any of these updates based on incoming actions, 
     // we need to let components subscribed to this store know that something
@@ -41,4 +55,4 @@ var Store = assign(EventEmitter.prototype, {
 
 });
 
-module.exports = Store;
+module.exports = UserStore;

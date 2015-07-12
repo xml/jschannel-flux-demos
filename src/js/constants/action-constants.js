@@ -5,5 +5,7 @@
 
 
 module.exports = {
+  SIGNUP_NEW_USER: 'SIGNUP_NEW_USER',
+  NEW_USER_REGISTERED: 'NEW_USER_REGISTERED',
 
 }
