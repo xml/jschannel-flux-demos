@@ -5,7 +5,12 @@
 
 
 module.exports = {
-  SIGNUP_NEW_USER: 'SIGNUP_NEW_USER',
+  // used by dispatcher to relay actions:
+  VIEW_ACTION: 'VIEW_ACTION',
+  API_ACTION: 'API_ACTION',
+  // used by action creators:
   NEW_USER_REGISTERED: 'NEW_USER_REGISTERED',
+  SIGNUP_NEW_USER: 'SIGNUP_NEW_USER',
+  USER_REQUESTS_SIGNUP: 'USER_REQUESTS_SIGNUP',
 
 }

@@ -10,7 +10,7 @@ var LoginTabs = React.createClass({
         <TabPane eventKey={1} tab='New User'>
           <SignupForm />
         </TabPane>
-        <TabPane eventKey={2} tab='Existing User Login'>TabPane 2 content</TabPane>
+        <TabPane eventKey={2} tab='Existing User Login'>(For now, we're not bothering with existing users)</TabPane>
       </TabbedArea>
     );
   }

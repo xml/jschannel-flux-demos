@@ -12,7 +12,6 @@ var Login = React.createClass({
           <h1>Welcome to the JSChannel IdeaFactory</h1>
         </div>
         <LoginTabs />
-        <li><Link href="/ideas">Go to Ideas</Link></li>
       </div>
     );
   },

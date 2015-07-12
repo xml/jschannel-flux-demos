@@ -1,15 +1,18 @@
 var React = require('react');
 var Button = require('react-bootstrap').Button;
 
+var navUtils = require('../../utils/navUtils');
 var Actions = require('../../actions/actions');
 var UserStore = require('../../stores/user_store');
 
 var SignupForm = React.createClass({
   componentDidMount: function() {
     UserStore.addChangeListener(this._onStoreChange);
+    UserStore.addSignupListener(this._onSignupSuccess);
   },
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onStoreChange);
+    UserStore.removeSignupListener(this._onSignupSuccess);
   },
   getInitialState: function() {
     return {
@@ -17,10 +20,15 @@ var SignupForm = React.createClass({
       email: ''
     }
   },
+  _onSignupSuccess: function() {
+    console.log("on signup success: ");
+    // Just change routes. 
+    navUtils.navigate('/ideas');
+  },
   _onStoreChange: function() {
-    console.log("signup form received change event after posting new user:");
-    console.log(UserStore.getCurrentUser());
-
+    console.log("on store change:");
+    // Normally, this would be where we would setState() with the new data
+    // in the store, and re-render. 
   },
   _onChangeName: function(event, value) {
     this.setState({
@@ -38,36 +46,36 @@ var SignupForm = React.createClass({
   },
 
   render: function() {
-    return ( < form className = "signup-form"
-      name = "signupForm"
-      onSubmit = {
-        this._onFormSubmit
-      } >
-      < div className = "signup-form__item row" >
-      < h4 className = "signup-form__item__heading" > Your Name < /h4> < p className = "signup-form__item__subhead" > < em > (So peeps can recognize you) < /em > < /p > < input type = "text"
-      name = "name"
-      className = "form-control signup-form__item__input"
-      placeholder = "FirstName LastName"
-      required value = {
-        this.state.name
-      }
-      onChange = {
-        this._onChangeName
-      }
-      /> < /div > < div className = "row" >
-      < h4 className = "signup-form__item__heading" > Email Address < /h4> < p className = "signup-form__item__subhead" > < em > (So IdeaFactory can recognize you) < /em > < /p > < input type = "email"
-      name = "email"
-      className = "form-control signup-form__item__input"
-      placeholder = "handle@domain.com"
-      required value = {
-        this.state.email
-      }
-      onChange = {
-        this._onChangeEmail
-      }
-      /> < /div > < Button bsStyle = 'success'
-      bsSize = 'large'
-      type = "submit" > Create! < /Button> < /form >
+    return (
+      <form className="signup-form"
+            name = "signupForm"
+            onSubmit = {this._onFormSubmit }>
+        <div className = "signup-form__item row">
+          <h4 className = "signup-form__item__heading"> Your Name </h4> 
+          <p className = "signup-form__item__subhead"> 
+            <em> (So peeps can recognize you) < /em > 
+          </p> 
+          <input  type = "text"
+                  name = "name"
+                  className = "form-control signup-form__item__input"
+                  placeholder = "FirstName LastName"
+                  required 
+                  value = {this.state.name }
+                  onChange = {this._onChangeName } /> 
+        </div > 
+        <div className = "row" >
+          <h4 className = "signup-form__item__heading" > Email Address < /h4> 
+          <p className = "signup-form__item__subhead" > < em > (So IdeaFactory can recognize you) < /em > < /p > 
+          <input type = "email"
+                  name = "email"
+                  className = "form-control signup-form__item__input"
+                  placeholder = "handle@domain.com"
+                  required 
+                  value = {this.state.email }
+                  onChange = {this._onChangeEmail } /> 
+        </div > 
+        < Button  bsStyle = 'success'bsSize = 'large'type = "submit" > Create! < /Button> 
+      </form >
     );
   }
 });

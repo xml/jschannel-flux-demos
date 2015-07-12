@@ -13,7 +13,7 @@ var APIUtils = {
       window.setTimeout(function() {
         // resolve the promise, just like Axios or $http would
         resolve(response);
-      }, 1500);
+      }, 500);
       
     });
 

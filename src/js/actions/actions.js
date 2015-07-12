@@ -10,7 +10,8 @@ var Actions = {
         email: response.email
       };
 
-      Dispatcher.dispatch({
+      console.log("action validated: ", response);
+      Dispatcher.handleApiAction({
         type: Constants.NEW_USER_REGISTERED,
         credentials: validatedCredentials
       });
