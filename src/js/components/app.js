@@ -11,7 +11,7 @@ var App = React.createClass({
   render:function(){
     // we use parens around multi-line JSX to tell React to ignore whitespace
     return (
-
+      <h1>App</h1>
     );
   },
 });
