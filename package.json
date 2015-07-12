@@ -1,0 +1,21 @@
+{
+  "name": "ideafactory-flux",
+  "version": "1.0.0",
+  "description": "Flux Tutorial App for JSChannel Conference",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Lilley <xml@christianlilley.com> (http://about.me/xml)",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "object-assign": "^3.0.0",
+    "react": "^0.13.3",
+    "react-async": "^2.1.0",
+    "react-router-component": "^0.25.4",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
