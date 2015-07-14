@@ -1,15 +1,27 @@
 // Third-party dependencies:
 var React = require('react');
 var Link = require('react-router-component').Link;
+var Button = require('react-bootstrap/lib/Button');
+
 
 var Ideas = React.createClass({
+  openIdeaCreateModal: function() {
+
+  },
+
   render:function(){
     // we use parens around multi-line JSX to tell React to ignore whitespace
     return (
-      <div>
-        <h1>Ideas</h1>
-        <p>This is the ideas component</p>
-        <li><Link href="/login">Go to Login</Link></li>
+      <div className="ideas-wrapper">
+        <div className="bs-callout bs-callout-warning">
+          <p>Get started now, collaborating on something you care about, by clicking 'New Idea'. Click on any existing idea to learn more about it, to join/leave it, and to see who else has joined it. You can join only one idea at a time.</p>
+        </div>
+        <Button bsStyle='success' bsSize='small' onClick={this.openIdeaCreateModal}>
+          New Idea
+        </Button>
+
+
+
       </div>
     );
   },
