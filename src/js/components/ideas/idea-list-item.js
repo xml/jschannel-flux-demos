@@ -1,7 +1,4 @@
 var React = require('react');
-var Modal = require('react-bootstrap/lib/Modal');
-var Button = require('react-bootstrap/lib/Button');
-
 
 var IdeaModal = require('./idea-modal');
 
@@ -30,21 +27,7 @@ var IdeaListItem = React.createClass({
           </div>
           <p className="home__idea-list__idea__detail">{idea.detail}</p>
         </div>
-        <Modal show={this.state.showModal} onHide={this.closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Idea: {idea.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Idea Detail:</h4>
-            <p class="modal-body__text">{ idea.detail }</p>
-            <hr />
-            <h4>Participants</h4>
-            <p class="modal-body__text">participant count: {idea.teamCount}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.closeModal}>Cancel</Button>
-          </Modal.Footer>
-        </Modal>
+        <IdeaModal idea={idea} closeFunc={this.closeModal} show={this.state.showModal} />
         
       </div>
     );
