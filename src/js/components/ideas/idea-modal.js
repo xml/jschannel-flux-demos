@@ -2,11 +2,16 @@ var React = require('react');
 var Modal = require('react-bootstrap/lib/Modal');
 var Button = require('react-bootstrap/lib/Button');
 
+var ViewActions = require('../../actions/ViewActions');
+
 var IdeaModal = React.createClass({
   closeModal: function() {
     this.props.closeFunc();
   },
-
+  joinIdea: function() {
+    console.log("sending idea index: ", this.props.index);
+    ViewActions.JoinCurrentUserToIdea(this.props.index);
+  },
   render: function() {
     var idea = this.props.idea;
     return (
@@ -22,7 +27,8 @@ var IdeaModal = React.createClass({
           <p className="modal-body__text">participant count: {idea.teamCount}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.closeModal}>Cancel</Button>
+          <Button bsStyle='success' onClick={this.joinIdea}>Join This Idea</Button>
+          <Button bsStyle='warning' onClick={this.closeModal}>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

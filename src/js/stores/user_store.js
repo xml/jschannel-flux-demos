@@ -9,7 +9,8 @@ var ApiUtils = require('../utils/apiUtils');
 var CHANGE_EVENT = 'change',
     SIGNUP_EVENT = 'signup';
 // our actual data: simple objects
-var _currentUser;
+var _currentUser,
+    _selectedIdeaIndex;
 
 function _establishUser(validatedCredentials) {
   _currentUser = validatedCredentials;
@@ -17,9 +18,11 @@ function _establishUser(validatedCredentials) {
 function _requestSignup(credentials) {
   ApiUtils.validateNewUser(credentials);
 }
+function _setSelectedIdea(ideaIndex) {
+  console.log("selected idea is set: ", ideaIndex);
+  _selectedIdeaIndex = ideaIndex;
+}
 
-
-// Create the Public Store Object with Node's EventEmitter:
 var UserStore = assign(EventEmitter.prototype, {
   getCurrentUser: function() {
     return _currentUser;
@@ -59,13 +62,13 @@ var UserStore = assign(EventEmitter.prototype, {
         _establishUser(action.credentials);
         UserStore.emitSignupSuccess();
         break;
+      case ActionConstants.USER_JOINS_IDEA:
+        _setSelectedIdea(action.ideaIndex);
+        UserStore.emitChange();
 
       default:
       // do nothing
     };
-    // after performing any of these updates based on incoming actions, 
-    // we need to let components subscribed to this store know that something
-    // has changed. We use events for this:
 
     return true;
   }),

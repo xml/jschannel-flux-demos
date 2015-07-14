@@ -17,7 +17,9 @@ var IdeaListItem = React.createClass({
     this.setState({ showModal: true });
   },
   render: function() {
-    var idea = this.props.idea;
+    var idea = this.props.idea,
+        index = this.props.index;
+
     return (
       <div className="ideaListItem">
         <div className="home__idea-list__idea" onClick={this._showIdeaModal}>
@@ -27,7 +29,7 @@ var IdeaListItem = React.createClass({
           </div>
           <p className="home__idea-list__idea__detail">{idea.detail}</p>
         </div>
-        <IdeaModal idea={idea} closeFunc={this.closeModal} show={this.state.showModal} />
+        <IdeaModal idea={idea} closeFunc={this.closeModal} show={this.state.showModal} index={index} />
         
       </div>
     );

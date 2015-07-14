@@ -9,7 +9,7 @@ function getStateFromIdeaStore() {
 }
 function getIdeaListItem(idea, index) {
   return (
-    <IdeaListItem key={index} idea={idea} />
+    <IdeaListItem key={index} idea={idea} index={index}/>
   );
 }
 
@@ -30,7 +30,6 @@ var IdeaList = React.createClass({
   render: function() {
 
     var items = this.state.ideas.map(getIdeaListItem);
-    console.log(items);
     return ( 
       <div className="home__idea-list">
         <h3 className="home__idea-list__header">All Active Ideas</h3>

@@ -17,6 +17,12 @@ var ViewActions = {
     });
     // ... we'd need an error-handler if we weren't mocking this. :-) 
   },
+  JoinCurrentUserToIdea: function(ideaIndex) {
+    Dispatcher.handleViewAction({
+        type: Constants.USER_JOINS_IDEA,
+        ideaIndex: ideaIndex,
+    });
+  }
 };
 
 module.exports = ViewActions;

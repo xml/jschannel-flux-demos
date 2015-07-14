@@ -10,6 +10,7 @@ var Constants = require('../constants/action-constants');
 var CHANGE_EVENT = 'change';
 
 var _ideas = [];
+
 function _addAllIdeas(rawIdeas) {
   // we might post-process our ideas here, before adding them to the store
   _ideas = rawIdeas;
@@ -27,7 +28,6 @@ var IdeaStore = assign(EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
   getAllIdeas: function() {
-    console.log(_ideas);
     return _ideas;
   },
   updateIdea: function(index) {
@@ -42,18 +42,18 @@ var IdeaStore = assign(EventEmitter.prototype, {
     // an event-type, plus the `action` object. 
     var action = payload.action;
     // decide what to do, depending on the action's type:
-    switch(action.type) {
+    switch (action.type) {
       case Constants.RECEIVED_ALL_IDEAS:
         _addAllIdeas(action.rawIdeas);
+        // after performing any of these updates based on incoming actions, 
+        // we need to let components subscribed to this store know that something
+        // has changed. We use pub-sub event-listeners for this:
+        IdeaStore.emitChange();
         break;
 
       default:
         // do nothing
     };
-    // after performing any of these updates based on incoming actions, 
-    // we need to let components subscribed to this store know that something
-    // has changed. We use pub-sub event-listeners for this:
-    IdeaStore.emitChange();
 
     return true;
   }),
