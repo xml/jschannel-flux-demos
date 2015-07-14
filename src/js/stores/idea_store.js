@@ -44,7 +44,6 @@ var IdeaStore = assign(EventEmitter.prototype, {
     // decide what to do, depending on the action's type:
     switch(action.type) {
       case Constants.RECEIVED_ALL_IDEAS:
-        console.log("all ideas received at IdeaStore: ", action.rawIdeas);
         _addAllIdeas(action.rawIdeas);
         break;
 

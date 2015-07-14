@@ -3,6 +3,8 @@ var React = require('react');
 var Link = require('react-router-component').Link;
 var Button = require('react-bootstrap/lib/Button');
 
+var IdeaList = require('./idea-list');
+
 
 var Ideas = React.createClass({
   openIdeaCreateModal: function() {
@@ -20,7 +22,7 @@ var Ideas = React.createClass({
           New Idea
         </Button>
 
-
+        <IdeaList />
 
       </div>
     );
