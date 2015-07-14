@@ -4,11 +4,11 @@ var Link = require('react-router-component').Link;
 var Button = require('react-bootstrap/lib/Button');
 
 var IdeaList = require('./idea-list');
-
+var UsercreatedIdea = require('./user-created-idea');
 
 var Ideas = React.createClass({
   openIdeaCreateModal: function() {
-
+    return true;
   },
 
   render:function(){
@@ -21,6 +21,7 @@ var Ideas = React.createClass({
         <Button bsStyle='success' bsSize='small' onClick={this.openIdeaCreateModal}>
           New Idea
         </Button>
+        <UsercreatedIdea />
 
         <IdeaList />
 

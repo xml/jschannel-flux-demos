@@ -9,8 +9,8 @@ var ApiUtils = require('../utils/apiUtils');
 var CHANGE_EVENT = 'change',
     SIGNUP_EVENT = 'signup';
 // our actual data: simple objects
-var _currentUser,
-    _selectedIdeaIndex;
+var _currentUser;
+var _selectedIdeaIndex;
 
 function _establishUser(validatedCredentials) {
   _currentUser = validatedCredentials;
@@ -22,12 +22,25 @@ function _setSelectedIdea(ideaIndex) {
   console.log("selected idea is set: ", ideaIndex);
   _selectedIdeaIndex = ideaIndex;
 }
+function _clearSelectedIdea() {
+  _selectedIdeaIndex = undefined;
+}
+
 
 var UserStore = assign(EventEmitter.prototype, {
   getCurrentUser: function() {
     return _currentUser;
   },
-
+  // getSelectedIdea: function() {
+  //   console.log("selected idea requested: ");
+  //   // return _selectedIdeaIndex;
+  //   return 0;
+  // },
+  returnSelectedIdea: function() {
+    console.log("selected idea requested: ");
+    console.log(_selectedIdeaIndex);
+    return _selectedIdeaIndex;
+  },
   emitChange: function() {
     console.log("emit change firing");
     this.emit(CHANGE_EVENT);
@@ -65,7 +78,11 @@ var UserStore = assign(EventEmitter.prototype, {
       case ActionConstants.USER_JOINS_IDEA:
         _setSelectedIdea(action.ideaIndex);
         UserStore.emitChange();
-
+        break;
+      case ActionConstants.USER_LEAVES_IDEA:
+        _clearSelectedIdea();
+        UserStore.emitChange();
+        break;
       default:
       // do nothing
     };

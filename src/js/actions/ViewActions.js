@@ -22,6 +22,11 @@ var ViewActions = {
         type: Constants.USER_JOINS_IDEA,
         ideaIndex: ideaIndex,
     });
+  },
+  CurrentUserLeavesIdea: function(ideaIndex) {
+    Dispatcher.handleViewAction({
+        type: Constants.USER_LEAVES_IDEA
+    });
   }
 };
 

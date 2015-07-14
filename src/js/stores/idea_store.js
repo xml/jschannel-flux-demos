@@ -4,7 +4,8 @@ var assign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 // our own creations
 var Dispatcher = require('../dispatcher/dispatcher');
-var Constants = require('../constants/action-constants');
+var ActionConstants = require('../constants/action-constants');
+var UserStore = require('./user_store');
 
 // an event-constant, like our action-constants:
 var CHANGE_EVENT = 'change';
@@ -30,27 +31,41 @@ var IdeaStore = assign(EventEmitter.prototype, {
   getAllIdeas: function() {
     return _ideas;
   },
+  getSelectedIdea: function() {
+    console.log("attempting to get idea");
+    // race condition starts here:
+    var selectedIndex = UserStore.returnSelectedIdea();
+    console.log(selectedIndex);
+
+    if (selectedIndex !== undefined) {
+      return _ideas[selectedIndex];  
+    } else {
+      return undefined;
+    };
+    return {};
+  },
   updateIdea: function(index) {
 
   },
   addIdea: function(newIdea) {
 
   },
-  // Register the Store with the Dispatcher
   dispatcherIndex: Dispatcher.register(function(payload) {
     // the payloads that arrive from the Dispatcher include two properties:
     // an event-type, plus the `action` object. 
     var action = payload.action;
     // decide what to do, depending on the action's type:
     switch (action.type) {
-      case Constants.RECEIVED_ALL_IDEAS:
+      case ActionConstants.RECEIVED_ALL_IDEAS:
         _addAllIdeas(action.rawIdeas);
-        // after performing any of these updates based on incoming actions, 
-        // we need to let components subscribed to this store know that something
-        // has changed. We use pub-sub event-listeners for this:
         IdeaStore.emitChange();
         break;
-
+      // case ActionConstants.USER_JOINS_IDEA:
+      //   // make sure the User Store is Finished Updating
+      //   Dispatcher.waitFor([UserStore.dispatcherIndex]);
+      //   // then notify the view, so it can retrieve the selected Idea;
+      //   IdeaStore.emitChange();
+      //   break;
       default:
         // do nothing
     };
