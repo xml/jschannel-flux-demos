@@ -28,7 +28,6 @@ var UserSelectedIdea = React.createClass({
     this.setState(newState);
   },
   getInitialState: function() {
-    console.log("In User Selected Idea, Index is: ", UserStore.returnSelectedIdea());
     return {
       selectedIdea: getSelectedIdeaFromIdeaStore(),
       showModal: false,
@@ -52,8 +51,6 @@ var UserSelectedIdea = React.createClass({
     this.setState(newState);
   },
   render: function() {
-    console.log("state:");
-    console.log(this.state);
     var idea = this.state.selectedIdea;
     if (idea !== undefined) {
       return (

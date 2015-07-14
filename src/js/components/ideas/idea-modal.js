@@ -9,7 +9,6 @@ var IdeaModal = React.createClass({
     this.props.closeFunc();
   },
   joinIdea: function() {
-    console.log("sending idea index: ", this.props.index);
     ViewActions.JoinCurrentUserToIdea(this.props.index);
     this.closeModal();
   },

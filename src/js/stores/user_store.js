@@ -19,7 +19,6 @@ function _requestSignup(credentials) {
   ApiUtils.validateNewUser(credentials);
 }
 function _setSelectedIdea(ideaIndex) {
-  console.log("selected idea is set: ", ideaIndex);
   _selectedIdeaIndex = ideaIndex;
 }
 function _getSelectedIdea() {
@@ -35,11 +34,9 @@ var UserStore = assign(EventEmitter.prototype, {
     return _currentUser;
   },
   returnSelectedIdea: function() {
-    console.log(_getSelectedIdea());
     return _getSelectedIdea();
   },
   emitChange: function() {
-    console.log("emit change firing");
     this.emit(CHANGE_EVENT);
   },
   emitSignupSuccess: function() {

@@ -35,6 +35,13 @@ var ViewActions = {
         newDetail: editedDetail,
     });
   },
+  UserCreatesIdea: function(newTitle, newDetail) {
+    Dispatcher.handleViewAction({
+        type: Constants.USER_CREATES_IDEA,
+        title: newTitle,
+        detail: newDetail,
+    });
+  },
 
 };
 

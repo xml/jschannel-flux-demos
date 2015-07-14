@@ -18,13 +18,16 @@ function _addAllIdeas(rawIdeas) {
 
 }
 function _updateIdea(index, newDetail) {
-  console.log(index);
-  console.log(newDetail);
   _ideas[index].detail = newDetail;
 }
 
-function _addIdea(newIdea) {
-
+function _addIdea(newTitle, newDetail) {
+  var newOne = {
+    teamCount: 1,
+    title: newTitle,
+    detail: newDetail
+  };
+  _ideas.push(newOne);
 }
 
 var IdeaStore = assign(EventEmitter.prototype, {
@@ -64,6 +67,10 @@ var IdeaStore = assign(EventEmitter.prototype, {
         var index = action.editedIndex,
             newDetail = action.newDetail;
         _updateIdea(index, newDetail);
+        IdeaStore.emitChange();
+        break;
+      case ActionConstants.USER_CREATES_IDEA:
+        _addIdea(action.title, action.detail);
         IdeaStore.emitChange();
         break;
       default:

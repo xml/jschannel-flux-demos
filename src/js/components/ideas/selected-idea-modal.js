@@ -24,7 +24,6 @@ var SelectedIdeaModal = React.createClass({
     });
   },
   leaveIdea: function() {
-    console.log("quitting idea");
     ViewActions.CurrentUserLeavesIdea();
     this.closeModal();
   },
@@ -68,7 +67,6 @@ var StaticDetails = React.createClass({
 
 var EditableDetails = React.createClass({
   saveEdits: function() {
-    console.log(this.props.index);
     ViewActions.UserEditsIdea(this.props.index, this.state.value);
     this.props.cancelEdits();
   },
