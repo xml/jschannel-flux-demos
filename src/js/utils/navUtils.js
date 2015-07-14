@@ -13,7 +13,6 @@ module.exports = {
     _navigator = ref;
   },
   navigate: function(path) {
-    console.log("trying to nav to: ", path);
     _navigator.navigate(path);
   },
 };

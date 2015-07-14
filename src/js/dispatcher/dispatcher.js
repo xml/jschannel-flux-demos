@@ -9,7 +9,7 @@ var Dispatcher = assign(new Dispatcher(), {
   // useful to distinguish View Actions from API Actions. 
   handleViewAction: function(action) {
     // push Actions to console so we can monitor them
-    console.log('action', action);
+    console.log('VIEW action received at Dispatcher', action);
     // simply, the dispatcher will just relay out any viewActions:
     this.dispatch({
       source: ActionConstants.VIEW_ACTION,
@@ -18,7 +18,7 @@ var Dispatcher = assign(new Dispatcher(), {
   },
   handleApiAction: function(action) {
     // push Actions to console so we can monitor them
-    console.log('action received at Dispatcher', action);
+    console.log('API action received at Dispatcher', action);
     // simply, the dispatcher will just relay out any apiActions:
     this.dispatch({
       source: ActionConstants.API_ACTION,

@@ -56,7 +56,6 @@ var UserStore = assign(EventEmitter.prototype, {
         _requestSignup(action.credentials);
         break;
       case ActionConstants.NEW_USER_REGISTERED: 
-        console.log("credentials received at Store: ", action.credentials);
         _establishUser(action.credentials);
         UserStore.emitSignupSuccess();
         break;

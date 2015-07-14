@@ -6,10 +6,11 @@
 
 module.exports = {
   // used by dispatcher to relay actions:
-  VIEW_ACTION: 'VIEW_ACTION',
   API_ACTION: 'API_ACTION',
+  VIEW_ACTION: 'VIEW_ACTION',
   // used by action creators:
   NEW_USER_REGISTERED: 'NEW_USER_REGISTERED',
+  RECEIVED_ALL_IDEAS: 'RECEIVED_ALL_IDEAS',
   SIGNUP_NEW_USER: 'SIGNUP_NEW_USER',
   USER_REQUESTS_SIGNUP: 'USER_REQUESTS_SIGNUP',
 
