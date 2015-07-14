@@ -2,7 +2,7 @@ var React = require('react');
 var Button = require('react-bootstrap').Button;
 
 var navUtils = require('../../utils/navUtils');
-var Actions = require('../../actions/actions');
+var ViewActions = require('../../actions/ViewActions');
 var UserStore = require('../../stores/user_store');
 
 var SignupForm = React.createClass({
@@ -21,12 +21,10 @@ var SignupForm = React.createClass({
     }
   },
   _onSignupSuccess: function() {
-    console.log("on signup success: ");
     // Just change routes. 
     navUtils.navigate('/ideas');
   },
   _onStoreChange: function() {
-    console.log("on store change:");
     // Normally, this would be where we would setState() with the new data
     // in the store, and re-render. 
   },
@@ -42,7 +40,7 @@ var SignupForm = React.createClass({
   },
   _onFormSubmit: function(event) {
     event.preventDefault();
-    Actions.SignupNewUser(this.state);
+    ViewActions.SignupNewUser(this.state);
   },
 
   render: function() {
