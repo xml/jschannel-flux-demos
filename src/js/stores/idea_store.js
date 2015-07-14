@@ -17,6 +17,15 @@ function _addAllIdeas(rawIdeas) {
   _ideas = rawIdeas;
 
 }
+function _updateIdea(index, newDetail) {
+  console.log(index);
+  console.log(newDetail);
+  _ideas[index].detail = newDetail;
+}
+
+function _addIdea(newIdea) {
+
+}
 
 var IdeaStore = assign(EventEmitter.prototype, {
   emitChange: function() {
@@ -32,10 +41,7 @@ var IdeaStore = assign(EventEmitter.prototype, {
     return _ideas;
   },
   getSelectedIdea: function() {
-    console.log("attempting to get idea");
-    // race condition starts here:
     var selectedIndex = UserStore.returnSelectedIdea();
-    console.log(selectedIndex);
 
     if (selectedIndex !== undefined) {
       return _ideas[selectedIndex];  
@@ -43,12 +49,6 @@ var IdeaStore = assign(EventEmitter.prototype, {
       return undefined;
     };
     return {};
-  },
-  updateIdea: function(index) {
-
-  },
-  addIdea: function(newIdea) {
-
   },
   dispatcherIndex: Dispatcher.register(function(payload) {
     // the payloads that arrive from the Dispatcher include two properties:
@@ -60,12 +60,12 @@ var IdeaStore = assign(EventEmitter.prototype, {
         _addAllIdeas(action.rawIdeas);
         IdeaStore.emitChange();
         break;
-      // case ActionConstants.USER_JOINS_IDEA:
-      //   // make sure the User Store is Finished Updating
-      //   Dispatcher.waitFor([UserStore.dispatcherIndex]);
-      //   // then notify the view, so it can retrieve the selected Idea;
-      //   IdeaStore.emitChange();
-      //   break;
+      case ActionConstants.USER_EDITS_IDEA:
+        var index = action.editedIndex,
+            newDetail = action.newDetail;
+        _updateIdea(index, newDetail);
+        IdeaStore.emitChange();
+        break;
       default:
         // do nothing
     };

@@ -22,6 +22,9 @@ function _setSelectedIdea(ideaIndex) {
   console.log("selected idea is set: ", ideaIndex);
   _selectedIdeaIndex = ideaIndex;
 }
+function _getSelectedIdea() {
+  return _selectedIdeaIndex;
+}
 function _clearSelectedIdea() {
   _selectedIdeaIndex = undefined;
 }
@@ -31,15 +34,9 @@ var UserStore = assign(EventEmitter.prototype, {
   getCurrentUser: function() {
     return _currentUser;
   },
-  // getSelectedIdea: function() {
-  //   console.log("selected idea requested: ");
-  //   // return _selectedIdeaIndex;
-  //   return 0;
-  // },
   returnSelectedIdea: function() {
-    console.log("selected idea requested: ");
-    console.log(_selectedIdeaIndex);
-    return _selectedIdeaIndex;
+    console.log(_getSelectedIdea());
+    return _getSelectedIdea();
   },
   emitChange: function() {
     console.log("emit change firing");

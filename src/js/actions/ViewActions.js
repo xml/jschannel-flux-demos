@@ -27,7 +27,15 @@ var ViewActions = {
     Dispatcher.handleViewAction({
         type: Constants.USER_LEAVES_IDEA
     });
-  }
+  },
+  UserEditsIdea: function(editedIndex, editedDetail) {
+    Dispatcher.handleViewAction({
+        type: Constants.USER_EDITS_IDEA,
+        editedIndex: editedIndex,
+        newDetail: editedDetail,
+    });
+  },
+
 };
 
 module.exports = ViewActions;
